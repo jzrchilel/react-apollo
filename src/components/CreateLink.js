@@ -12,7 +12,7 @@ const POST_MUTATION = gql`
         }
     }
 `
-function CreateLink() {
+function CreateLink({ history }) {
     const [description, setDescription] = useState('')
     const [url, setUrl] = useState('')
 
@@ -34,7 +34,11 @@ function CreateLink() {
                     placeholder="The URL for the link"
                 />
             </div>
-            <Mutation mutation={POST_MUTATION} variables={{ description, url }}>
+            <Mutation 
+                mutation={POST_MUTATION} 
+                variables={{ description, url }}
+                onCompleted={() => history.push('/')}
+            >
                 {postMutation => <button onClick={postMutation}>Submit</button>}
             </Mutation>
         </>
